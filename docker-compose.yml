@@ -4,7 +4,8 @@ services:
     app:
         container_name: app
         restart: always
-        image: 175817389458.dkr.ecr.us-east-1.amazonaws.com/repository:app
+        build: ./api
+        image: salmaal/api:latest
         ports:
             - "4000:4000"
         depends_on:
@@ -13,7 +14,8 @@ services:
     client:
         container_name: client
         restart: always
-        image: 175817389458.dkr.ecr.us-east-1.amazonaws.com/repository:client
+        build: ./client
+        image: salmaal/client:latest
         ports:
             - "3007:3000"
         depends_on:
@@ -22,8 +24,9 @@ services:
     mongo:
         container_name: mongo
         restart: always
-        image: mongo
-        volumes:
-            - ./data:/data/db
+        image: docker.io/library/mongo:latest  
+        build:
+        context: .
+        image: salmaal/mongo:latest
         ports:
             - "27017:27017"

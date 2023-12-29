@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    options {
-        scriptPath 'jenkinsfile'
-    }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'

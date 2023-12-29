@@ -1,12 +1,22 @@
 pipeline {
     agent any
-
+    options {
+        scriptPath 'jenkinsfile'
+    }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-credentials')
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
     }
 
     stages {
+        stage('Checkout Code') {
+            steps {
+                script {
+                    // Checkout de votre dépôt GitHub
+                    checkout([$class: 'GitSCM', branches: [[name: '*/main']], userRemoteConfigs: [[url: 'https://github.com/salma-al47/deploy-micro.git']]])
+                }
+            }
+        }
         stage('Build Images') {
             steps {
                 script {
